@@ -5,12 +5,18 @@ function commWithServer() {
 
         .then(result => result.text())
         .then(text => {
-            let main = document.getElementById('description')
+            let main = document.getElementById('update-beer')
             main.innerHTML = text
             var jsonString = '{"description":""}';
             var jsonPretty = JSON.stringify(JSON.parse(jsonString));
             console.log(jsonPretty)
         });
+        document.addEventListener('DOMContentLoaded', () => {
+            let btn = document.getElementById('beerinput');
+            btn.addEventListener('click', () => {
+                commWithServer();
+            })
+        })
 }
 
 commWithServer()
@@ -49,15 +55,26 @@ function reviews2() {
             console.log(jsonPretty)
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            let btn = document.getElementById('actualbutton');
-            btn.addEventListener('click', () => {
-                reviews2();
-            })
+    document.addEventListener('DOMContentLoaded', () => {
+        let btn = document.getElementById('actualbutton');
+        btn.addEventListener('click', () => {
+            reviews2();
         })
+    })
 }
 
 reviews2()
 
 
 
+function fetchImage() {
+    const imageUrl = "https://i.ibb.co/wQ4G0w1/flatiron-brew.png";
+    fetch(imageUrl)
+    .then(response => response.blob())
+        .then(imageBlob => {
+            const imageObjectURL = URL.createObjectURL(imageBlob);
+            console.log(imageObjectURL);
+        });
+}
+
+fetchImage()
