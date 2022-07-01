@@ -7,7 +7,9 @@ function commWithServer() {
         .then(text => {
             let main = document.getElementById('description')
             main.innerHTML = text
-            console.log(text)
+            var jsonString = '{"description":""}';
+            var jsonPretty = JSON.stringify(JSON.parse(jsonString));
+            console.log(jsonPretty)
         });
 }
 
@@ -31,14 +33,31 @@ commWithServer()
 //     main.innerHTML = text
 //     console.log(document.getElementById('your-review').innerHTML.text)
 // }
-// document.addEventListener('DOMContentLoaded', () => {
-//     let btn = document.getElementById('actualbutton');
-//     btn.addEventListener('click', () => {
-//         yourReview();
-//     })
-// })
+
 
 // yourReview()
+
+function reviews2() {
+    fetch('http://localhost:3000/beers/1')
+
+        .then(result => result.text())
+        .then(text => {
+            let main = document.getElementById('your-review')
+            main.innerHTML = text
+            var jsonString = '{"reviews":""}';
+            var jsonPretty = JSON.stringify(JSON.parse(jsonString));
+            console.log(jsonPretty)
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let btn = document.getElementById('actualbutton');
+            btn.addEventListener('click', () => {
+                reviews2();
+            })
+        })
+}
+
+reviews2()
 
 
 
